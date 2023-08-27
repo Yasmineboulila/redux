@@ -1,25 +1,28 @@
 import React from 'react'
-import Card from 'react-bootstrap/Card';
+import { useDispatch } from 'react-redux';
+import { toggleTask, editTask } from '../redux/actions/actions';
 export default function Task({task}) {
-   
+  const dispatch = useDispatch();
+
+  const handleEdit = (newDescription) => {
+    dispatch(editTask(task.id, newDescription));
+  };
+
+  const handleToggle = () => {
+    dispatch(toggleTask(task.id));
+  };
   return (
     <div>
-        <>
-    <Card style={{ width: '18rem' }}>
-    <Card.Body>
-      <Card.Text>
-      { task.id} 
-      </Card.Text>
-      <Card.Text>
-      { task.description} 
-      </Card.Text>
-      <Card.Text>
-      { task.isDone} 
-      </Card.Text>
-    </Card.Body>
-  </Card>
-
-  </>
+       <input
+        type="checkbox"
+        checked={task.isDone}
+        onChange={handleToggle}
+      />
+      <input
+        type="text"
+        value={task.description}
+        onChange={(e) => handleEdit(e.target.value)}
+      />
     </div>
   )
 }

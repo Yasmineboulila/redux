@@ -4,21 +4,21 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React,{ useState,useEffect } from "react";
 import ListTask from './component/ListTask';
 import Addtask from './component/Addtask';
-
+import { Provider } from 'react-redux';
+import store from './redux/store/store';
 function App() {
-  const [data,setData]=useState([])
-  useEffect(()=>{
-    var newTodo=JSON.parse(localStorage.getItem("data"))
-    if(newTodo){
-    setData([...data,newTodo])
-    }
-  },[data])
+ 
   return ( 
   
-    <div className="App">
-      <Addtask/>
-   <ListTask task={data} />
-    </div>
+   
+      <Provider store={store}>
+      <div>
+        <h1>ToDo Application</h1>
+        <Addtask />
+        <ListTask />
+      </div>
+    </Provider>
+  
   );
 }
 

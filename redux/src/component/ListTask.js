@@ -1,21 +1,15 @@
 import React from 'react'
 import Task from './Task';
-import { useState } from 'react';
-import Addtask from './Addtask';
-export default function ListTask({data}) {
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => {
-    setShow(true)
-    
-  }
+import { useSelector } from 'react-redux';
+export default function ListTask() {
+  
+    const tasks = useSelector(state => state.tasks);
   return (
-    <div style={{display:"flex",justifyContent:"space-around",flexWrap:"wrap"}}>
-    {data.filter((task)=>task.isDone).map((el)=><Task key={el.id} task={el} />)}
-    <button style={{backgroundColor:"orange"}} onClick={handleShow} >Add Task</button>
-    <Addtask show={show}  handleClose={()=>handleClose()} />
+    <div >
 
+{tasks.map(task => (
+        <Task key={task.id} task={task} />
+      ))}
     </div>
   )
 }

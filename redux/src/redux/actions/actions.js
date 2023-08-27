@@ -1,11 +1,15 @@
-import { ADD_TASK } from "./actionType";
-import { GET_TASK } from "./actionType";
-export const addTask = (task) => ({
-  type: ADD_TASK,
-  payload: task,
-});
+import { ADD_TASK, EDIT_TASK,TOGGLE_TASK } from "./actionType";
 
-export const updateTask = (task) => ({
-  type: GET_TASK,
-  payload: task,
+export const addTask = (id, description) => ({
+  type: ADD_TASK,
+  payload: { id, description }
 });
+export const editTask=( { id, description })=>(
+  {type:EDIT_TASK,
+  payload: { id, description }}
+)
+export const toggleTask=( { id})=>({
+  type:TOGGLE_TASK,
+  payload:id
+})
+
